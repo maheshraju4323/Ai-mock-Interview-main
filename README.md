@@ -1,72 +1,99 @@
-# AI-Powered Mock Interview Platform
+# AI Mock Interview
 
-[Mohamed Amaan Profile](https://amaan.devtree.site/)
+## Overview
 
-## Tech Blog and Products
-[DevBlog](https://www.devblog.blog/)
-
-
-<img width="1901" height="874" alt="Screenshot 2026-02-08 153126" src="https://github.com/user-attachments/assets/39ced7a0-22a4-4329-93a5-0d9991dba2c9" />
-
-
-## Description
-This is an advanced and interactive AI-powered mock interview platform designed to help job seekers practice and improve their interview skills. Built with Next.js, Tailwind CSS, and Gemini Api,PostgreSQL, Drizzle ORM, it provides users with a good interview experience to enhance their chances of landing their dream job.
+AI-powered platform where users can practice mock interviews, answer AI-generated questions, receive feedback, ratings, and performance reports.
 
 ## Features
-- AI-driven Interview: interview questions and feedback powered by AI.
-- Personalized Interview Experiences: Tailor interview sessions based on job roles and industries.
-- User Experience Level Questions: Questions are adjusted based on the user's experience level, ensuring relevance and appropriate difficulty.
-- Detailed Feedback and Insights: Receive detailed feedback on your performance, including strengths, areas for improvement, and actionable tips.
-- Question Bank: Access a wide range of interview questions across different domains and difficulty levels.
-- Overall Grade: Receive an overall grade for each interview session, providing a quick assessment of your performance.
-- Recent Interviews: Easily access and review your recent interview sessions directly from the home page.
+
+- AI-powered Mock Interviews
+- Technical Interviews
+- HR Interviews
+- Behavioral Interviews
+- Coding Interviews
+- CSE interview preparation
+- ECE/EC interview preparation
+- Mechanical Engineering interview preparation
+- AI-generated questions
+- Answer evaluation and feedback
+- Performance reports
+- Question bank and practice
+- User authentication
+- Interview history
+
+## Interview Flow
+
+Create New Interview
+→ Select Branch
+→ Select Job Role
+→ Select Interview Type
+→ Enter Interview Details
+→ Generate AI Questions
+→ Answer Questions
+→ Receive AI Feedback
+→ View Performance Report
+
+## Supported Branches
+
+- Computer Science Engineering (CSE)
+- Electronics and Communication Engineering (ECE/EC)
+- Mechanical Engineering
+
+## Interview Types
+
+- Technical Interview
+- HR Interview
+- Behavioral Interview
+- Coding Interview
+
+## Technology Stack
+
+- Next.js
+- React
+- Tailwind CSS
+- Google Gemini AI
+- Neon PostgreSQL
+- Drizzle ORM
+- Clerk Authentication
+
+## Installation
+
+```bash
+git clone https://github.com/maheshraju4323/Ai-mock-Interview-main.git
+cd Ai-mock-Interview-main
+npm install
+npm run dev
+```
 
 ## Getting Started
-To get started with the AI-Powered Mock Interview Platform, follow these steps:
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/modamaan/Ai-mock-Interview.git
+1. Clone the repository using the command above.
+2. Install dependencies with `npm install`.
+3. Start the development server with `npm run dev`.
+4. Open your browser and go to http://localhost:3000 to access the application.
 
-2. Navigate to the project directory:
-   ```bash
-   cd ai-mock-interview
+## Environment Variables
 
-3. Install dependencies by running: `npm install` or `yarn install`
+Before running the application, create a `.env.local` file in the project root with the following keys:
 
-4. Start the Server `npm run dev` or `yarn dev`
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+GEMINI_API_KEY=your_gemini_api_key
+DRIZZLE_DB_URL=your_neon_postgresql_connection_string
+```
 
-5. Access the Application: Open your browser and go to http://localhost:3000 to access the application.
+You can obtain these by signing up for:
 
-## Technologies Used
-- Next.js: A React framework for building server-side rendered and static web applications.
-- Gemini API: Provides an interface for accessing the AI interview functionalities.
-- PostgreSQL: A powerful, open-source object-relational database system.
-- Neon Serverless: A serverless deployment for PostgreSQL, offering scalability and ease of use.
-- Drizzle ORM: An ORM that makes database interactions simpler and more intuitive.
+- [Clerk](https://clerk.com) for authentication keys
+- [Google AI Studio](https://aistudio.google.com) for the Gemini API key
+- [Neon](https://neon.tech) for a serverless PostgreSQL connection string
 
 ## Usage
-To use the AI-Powered Mock Interview Platform, follow these guidelines:
-- Create an Account: Sign up to start your mock interview sessions.
-- Choose Interview Type: Select the type of interview (e.g., technical, behavioral) and job role
-- Start Interview: Begin your mock interview and respond to the AI-generated questions.
-- Receive Feedback: After completing the interview, get detailed feedback and insights to improve.
-- Review Recent Interviews: Access your most recent interviews directly from the home page for quick review and continued improvement.
 
-## Feedback
-
-If you have any feedback, please reach me at [mohamedamaan319@gmail.com](mailto:mohamedamaan319@gmail.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/mohamedamaan319/).
-
-
-## Contributing
-Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
-1. Fork this repository.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them to your branch.
-4. Push your changes to your forked repository.
-5. Submit a pull request to the main repository.
-
-
-## Support
-
-Show your support by 🌟 the project!!
+- **Create an account** to start your mock interview sessions.
+- **Select a branch and interview type** (technical, HR, behavioral, coding) for your target role.
+- **Enter your interview details** (job role, description, and experience level).
+- **Answer AI-generated questions** tailored to your branch and interview type.
+- **Receive feedback and ratings** on each of your answers.
+- **Review your performance reports** and interview history to keep improving.

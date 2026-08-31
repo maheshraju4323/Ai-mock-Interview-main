@@ -89,6 +89,24 @@ const Interview = ({ params }) => {
                   <p className="text-sm font-semibold text-slate-900 dark:text-white">{interviewData.jobExperience} years</p>
                 </div>
               </div>
+              {interviewData.branch && (
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800">
+                  <Briefcase className="w-5 h-5 text-indigo-500 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Branch</p>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white">{interviewData.branch}</p>
+                  </div>
+                </div>
+              )}
+              {interviewData.interviewType && (
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800">
+                  <Bot className="w-5 h-5 text-purple-500 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Interview Type</p>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white">{interviewData.interviewType}</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

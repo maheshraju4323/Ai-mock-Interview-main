@@ -26,7 +26,7 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    const { jobPosition, jobDesc, jobExperience } = body;
+    const { jobPosition, jobDesc, jobExperience, branch, interviewType } = body;
 
     // Validate
     if (!jobPosition?.trim() || !jobDesc?.trim() || !jobExperience?.trim()) {
@@ -46,12 +46,28 @@ export async function POST(request) {
     const position = sanitize(jobPosition);
     const description = sanitize(jobDesc);
     const experience = sanitize(jobExperience);
+    const selectedBranch = (branch || "").trim().substring(0, 50);
+    const selectedType = (interviewType || "").trim().substring(0, 50);
+
+    // Build a context-aware prompt based on branch + interview type
+    const focusArea = buildFocusArea(selectedBranch, selectedType);
+    const tone = selectedType === "HR"
+      ? "Generate HR interview questions focused on the candidate's background, skills, experience, communication, teamwork, and culture fit for the selected branch and job role."
+      : selectedType === "Behavioral"
+      ? "Generate behavioral interview questions (STAR-format style) focused on past experiences, problem solving, leadership, teamwork, adaptability, and soft skills relevant to the selected branch and job role."
+      : "Generate technical interview questions.";
 
     // Generate questions with Gemini
     const prompt = `Generate 5 interview questions and answers for:
 Job Position: ${position}
 Job Description: ${description}
 Years of Experience: ${experience}
+Selected Branch: ${selectedBranch || "Not specified"}
+Interview Type: ${selectedType || "Technical"}
+
+${focusArea}
+
+${tone}
 
 Please provide a valid JSON array with this exact format:
 [
@@ -61,7 +77,7 @@ Please provide a valid JSON array with this exact format:
   }
 ]
 
-Keep questions professional and relevant to the job requirements.`;
+Keep questions professional and relevant to the selected branch, interview type, and job requirements.`;
 
     const session = createChatSession();
     const aiResult = await session.sendMessage(prompt);
@@ -113,6 +129,8 @@ Keep questions professional and relevant to the job requirements.`;
       jobExperience: experience,
       createdBy: userEmail,
       createdAt,
+      branch: selectedBranch || null,
+      interviewType: selectedType || null,
     });
 
     const userName =
@@ -132,4 +150,25 @@ Keep questions professional and relevant to the job requirements.`;
       { status: 500 }
     );
   }
+}
+
+// Build the subject focus area based on the selected branch and interview type.
+function buildFocusArea(branch, type) {
+  const b = (branch || "").toLowerCase();
+  const t = (type || "").toLowerCase();
+
+  if (t === "hr" || t === "behavioral") {
+    return "Focus the questions on general professional competencies, soft skills, and the candidate's fit for the job role rather than deep technical details.";
+  }
+
+  if (b.includes("ece")) {
+    return "Focus on Electronics and Communication Engineering topics: Digital Electronics, Analog Electronics, Communication Systems, Microprocessors, Embedded Systems, Signals and Systems, and the selected job role if provided.";
+  }
+
+  if (b.includes("mech")) {
+    return "Focus on Mechanical Engineering topics: Thermodynamics, Manufacturing, Machine Design, Fluid Mechanics, Strength of Materials, and the selected job role if provided.";
+  }
+
+  // Default: Computer Science / Software Engineering
+  return "Focus on Computer Science topics: Programming, Data Structures, Algorithms, DBMS, Operating Systems, Computer Networks, and the selected job role and tech stack.";
 }
