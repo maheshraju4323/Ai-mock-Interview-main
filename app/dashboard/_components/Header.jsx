@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { UserButton, SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { UserButton, SignedIn, SignedOut, SignInButton, SignOutButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "@/components/ModeToggle";
 import Link from "next/link";
@@ -13,6 +13,7 @@ import {
   HelpCircle,
   Menu,
   X,
+  LogOut,
 } from "lucide-react";
 
 const navLinks = [
@@ -91,6 +92,27 @@ const Header = () => {
         </nav>
 
         <div className="p-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
+          {isUserButtonLoaded && (
+            <SignedIn>
+              <div className={`flex items-center gap-2 p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 ${collapsed ? "justify-center" : "justify-between"}`}>
+                <div className="flex items-center gap-2.5">
+                  <UserButton afterSignOutUrl="/" />
+                  {!collapsed && <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Account</span>}
+                </div>
+                {!collapsed && (
+                  <SignOutButton redirectUrl="/">
+                    <button
+                      title="Log Out"
+                      className="flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
+                    >
+                      <LogOut className="w-3.5 h-3.5" />
+                      <span>Logout</span>
+                    </button>
+                  </SignOutButton>
+                )}
+              </div>
+            </SignedIn>
+          )}
           <ModeToggle collapsed={collapsed} />
           <button
             onClick={() => setCollapsed(!collapsed)}
@@ -169,6 +191,14 @@ const Header = () => {
                 </Link>
               );
             })}
+            <SignedIn>
+              <SignOutButton redirectUrl="/">
+                <button className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors">
+                  <LogOut className="w-5 h-5" />
+                  <span>Log Out</span>
+                </button>
+              </SignOutButton>
+            </SignedIn>
           </div>
         )}
       </header>

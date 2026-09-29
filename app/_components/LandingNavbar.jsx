@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { SignInButton, useAuth } from "@clerk/nextjs";
-import { Menu, X, Bot } from "lucide-react";
+import { SignInButton, SignOutButton, UserButton, useAuth } from "@clerk/nextjs";
+import { Menu, X, Bot, LogOut } from "lucide-react";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -59,12 +59,24 @@ const LandingNavbar = () => {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             {isSignedIn ? (
-              <Link
-                href="/dashboard"
-                className="px-5 py-2.5 text-sm font-semibold text-white gradient-bg rounded-xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-105 transition-all duration-200"
-              >
-                Dashboard
-              </Link>
+              <div className="flex items-center gap-3">
+                <Link
+                  href="/dashboard"
+                  className="px-5 py-2.5 text-sm font-semibold text-white gradient-bg rounded-xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-105 transition-all duration-200"
+                >
+                  Dashboard
+                </Link>
+                <UserButton afterSignOutUrl="/" />
+                <SignOutButton redirectUrl="/">
+                  <button
+                    title="Log Out"
+                    className="p-2 rounded-xl text-gray-600 hover:text-red-600 hover:bg-gray-100 transition-colors flex items-center gap-1.5 text-sm font-medium"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span>Log Out</span>
+                  </button>
+                </SignOutButton>
+              </div>
             ) : (
               <>
                 <SignInButton mode="modal">
@@ -110,12 +122,26 @@ const LandingNavbar = () => {
           ))}
           <div className="mt-3 pt-3 border-t border-gray-100 space-y-2">
             {isSignedIn ? (
-              <Link
-                href="/dashboard"
-                className="block w-full text-center px-5 py-2.5 text-sm font-semibold text-white gradient-bg rounded-xl"
-              >
-                Dashboard
-              </Link>
+              <div className="space-y-2">
+                <Link
+                  href="/dashboard"
+                  className="block w-full text-center px-5 py-2.5 text-sm font-semibold text-white gradient-bg rounded-xl"
+                >
+                  Dashboard
+                </Link>
+                <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-gray-50">
+                  <div className="flex items-center gap-2">
+                    <UserButton afterSignOutUrl="/" />
+                    <span className="text-sm font-medium text-gray-700">Account</span>
+                  </div>
+                  <SignOutButton redirectUrl="/">
+                    <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                      <LogOut className="w-4 h-4" />
+                      <span>Log Out</span>
+                    </button>
+                  </SignOutButton>
+                </div>
+              </div>
             ) : (
               <>
                 <SignInButton mode="modal">
